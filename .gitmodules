@@ -1,0 +1,3 @@
+[submodule "document-sequence-diagram"]
+	path = document-sequence-diagram
+	url = git@github.com:song-rit/authentication-short-flow.git
