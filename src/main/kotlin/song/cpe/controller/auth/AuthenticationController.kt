@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import song.cpe.controller.auth.model.auth.AuthRequest
 import song.cpe.controller.auth.model.auth.AuthResponse
+import song.cpe.service.auth.AuthService
 
 
 @RestController
 @RequestMapping("/api/v1/oauth")
-class AuthenticationController {
+class AuthenticationController(
+    private val authService: AuthService
+) {
 
     @PostMapping(
             value = ["/auth"],
@@ -34,6 +37,8 @@ class AuthenticationController {
             grantType = grantType,
             scope = scope,
     )
+
+        authService.auth(request)
 
         val response = AuthResponse(
                 accessToken = "accessToken",

@@ -4,15 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 
 data class AuthRequest(
-        @JsonProperty("client_id")
-        private val clientId: String,
+    @JsonProperty("client_id")
+    val clientId: String,
 
-        private val username: String,
+    val username: String,
 
-        private val password: String,
+    val password: String,
 
-        @JsonProperty("grant_type")
-        private val grantType: String,
+    @JsonProperty("grant_type")
+    val grantType: String,
 
-        private val scope: String
+    val scope: String
 )
