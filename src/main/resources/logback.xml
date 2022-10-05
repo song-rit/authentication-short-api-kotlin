@@ -1,0 +1,19 @@
+<configuration>
+
+    <appender name="JsonConsole"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+        </encoder>
+    </appender>
+
+    <springProfile name="default">
+        <logger name="song.cpe.authentication-short-api-kotlin" level="INFO" additivity="false">
+            <appender-ref ref="JsonConsole"/>
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="JsonConsole"/>
+        </root>
+    </springProfile>
+
+</configuration>
