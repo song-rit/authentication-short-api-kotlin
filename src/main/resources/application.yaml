@@ -12,3 +12,5 @@ management:
       pathMapping:
         health: /health-check
       basePath: /
+endpoint:
+  auth: "http://localhost:8884/api/v1/auth"

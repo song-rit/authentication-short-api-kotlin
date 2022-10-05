@@ -38,11 +38,11 @@ class AuthenticationController(
             scope = scope,
     )
 
-        authService.auth(request)
+        val result = authService.auth(request)
 
         val response = AuthResponse(
-                accessToken = "accessToken",
-                refreshToken = "refreshToken"
+                accessToken = result.accessToken,
+                refreshToken = result.refreshToken
         )
         return ResponseEntity<AuthResponse>(response, HttpStatus.OK)
     }

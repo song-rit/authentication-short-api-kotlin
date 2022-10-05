@@ -18,18 +18,6 @@ class ExceptionHandler {
         private val logger = LoggerFactory.getLogger(ExceptionHandler::class.java)
     }
 
-    @ExceptionHandler(CommonException::class)
-    fun handleCommonException(ex: CommonException): ResponseEntity<ErrorResponse> {
-
-        val errorResponse = ErrorResponse(
-            code = ex.code,
-            message = "Something wrong with solve"
-        )
-        logger.info("error_msg: {}", errorResponse)
-
-        return ResponseEntity(errorResponse, ex.httpStatus)
-    }
-
     @ExceptionHandler(value = [BaseException::class])
     fun handleBaseException(ex: BaseException): ResponseEntity<ErrorResponse> {
 
@@ -41,5 +29,32 @@ class ExceptionHandler {
         logger.info("error_msg: {}", errorResponse)
 
         return ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.OK)
+    }
+
+    @ExceptionHandler(CommonException::class)
+    fun handleCommonException(ex: CommonException): ResponseEntity<ErrorResponse> {
+
+        logger.error(ex.message, ex)
+
+        val errorResponse = ErrorResponse(
+            code = ex.code,
+            message = "Something wrong with solve"
+        )
+        logger.info("error_msg: {}", errorResponse)
+
+        return ResponseEntity(errorResponse, ex.httpStatus)
+    }
+
+    @ExceptionHandler(RuntimeException::class)
+    fun handleCommonException(ex: RuntimeException): ResponseEntity<ErrorResponse> {
+
+        logger.error(ex.message, ex)
+        val errorResponse = ErrorResponse(
+            code = "auth-001",
+            message = "Something wrong with solve"
+        )
+        logger.info("error_msg: {}", errorResponse)
+
+        return ResponseEntity(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY)
     }
 }
